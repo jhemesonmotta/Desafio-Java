@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.jhemeson</groupId>
-	<artifactId>ferramenta-produtividade-back</artifactId>
+	<artifactId>desafio-java-back</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>ferramenta-produtividade-back</name>
-	<description>Back pro projeto do mestrado</description>
+	<name>desafio-java-back</name>
+	<description>Back pro projeto java do desafio stefanini</description>
 
 	<properties>
 		<java.version>1.8</java.version>

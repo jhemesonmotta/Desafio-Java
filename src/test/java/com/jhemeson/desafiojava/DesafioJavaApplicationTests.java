@@ -1,10 +1,10 @@
-package com.jhemeson.ferramentaprodutividadeback;
+package com.jhemeson.desafiojava;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class FerramentaProdutividadeBackApplicationTests {
+class DesafioJavaApplicationTests {
 
 	@Test
 	void contextLoads() {

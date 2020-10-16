@@ -1,10 +1,10 @@
-package com.jhemeson.ferramentaprodutividadeback.service;
+package com.jhemeson.desafiojava.service;
 
-import com.jhemeson.ferramentaprodutividadeback.dto.MessageResponseDTO;
-import com.jhemeson.ferramentaprodutividadeback.dto.ProjetoDTO;
-import com.jhemeson.ferramentaprodutividadeback.entity.Projeto;
-import com.jhemeson.ferramentaprodutividadeback.mapper.ProjetoMapper;
-import com.jhemeson.ferramentaprodutividadeback.repository.ProjetoRepository;
+import com.jhemeson.desafiojava.dto.MessageResponseDTO;
+import com.jhemeson.desafiojava.dto.ProjetoDTO;
+import com.jhemeson.desafiojava.entity.Projeto;
+import com.jhemeson.desafiojava.repository.ProjetoRepository;
+import com.jhemeson.desafiojava.mapper.ProjetoMapper;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

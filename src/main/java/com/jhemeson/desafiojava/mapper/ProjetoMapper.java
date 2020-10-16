@@ -1,7 +1,7 @@
-package com.jhemeson.ferramentaprodutividadeback.mapper;
+package com.jhemeson.desafiojava.mapper;
 
-import com.jhemeson.ferramentaprodutividadeback.dto.ProjetoDTO;
-import com.jhemeson.ferramentaprodutividadeback.entity.Projeto;
+import com.jhemeson.desafiojava.dto.ProjetoDTO;
+import com.jhemeson.desafiojava.entity.Projeto;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

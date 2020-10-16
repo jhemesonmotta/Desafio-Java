@@ -1,4 +1,4 @@
-package com.jhemeson.ferramentaprodutividadeback;
+package com.jhemeson.desafiojava;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,10 +7,10 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
-public class FerramentaProdutividadeBackApplication {
+public class DesafioJavaApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(FerramentaProdutividadeBackApplication.class, args);
+		SpringApplication.run(DesafioJavaApplication.class, args);
 	}
 
 	@Bean

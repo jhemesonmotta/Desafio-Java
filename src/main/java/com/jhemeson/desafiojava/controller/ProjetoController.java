@@ -1,10 +1,10 @@
-package com.jhemeson.ferramentaprodutividadeback.controller;
+package com.jhemeson.desafiojava.controller;
 
-import com.jhemeson.ferramentaprodutividadeback.dto.ComandoAddVariosProjetos;
-import com.jhemeson.ferramentaprodutividadeback.dto.MessageResponseDTO;
-import com.jhemeson.ferramentaprodutividadeback.dto.ProjetoDTO;
-import com.jhemeson.ferramentaprodutividadeback.entity.Projeto;
-import com.jhemeson.ferramentaprodutividadeback.service.ProjetoService;
+import com.jhemeson.desafiojava.dto.ComandoAddVariosProjetos;
+import com.jhemeson.desafiojava.dto.MessageResponseDTO;
+import com.jhemeson.desafiojava.dto.ProjetoDTO;
+import com.jhemeson.desafiojava.entity.Projeto;
+import com.jhemeson.desafiojava.service.ProjetoService;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

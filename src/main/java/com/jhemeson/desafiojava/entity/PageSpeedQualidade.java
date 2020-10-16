@@ -1,4 +1,4 @@
-package com.jhemeson.ferramentaprodutividadeback.entity;
+package com.jhemeson.desafiojava.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
