@@ -5,6 +5,7 @@ import com.jhemeson.desafiojava.dto.MessageResponseDTO;
 import com.jhemeson.desafiojava.dto.VotoDTO;
 import com.jhemeson.desafiojava.entity.Voto;
 import com.jhemeson.desafiojava.exceptions.SessaoExpiradaException;
+import com.jhemeson.desafiojava.exceptions.VotoExistenteException;
 import com.jhemeson.desafiojava.mapper.VotoMapper;
 import com.jhemeson.desafiojava.repository.VotoRepository;
 import javassist.NotFoundException;
@@ -25,22 +26,15 @@ public class VotoService {
         this.sessaoVotacaoService = sessaoVotacaoService;
     }
 
-    public MessageResponseDTO create(ComandoAdicionarVotoDTO comandoAdicionarVotoDTO) throws NotFoundException, SessaoExpiradaException {
+    public MessageResponseDTO create(ComandoAdicionarVotoDTO comandoAdicionarVotoDTO) throws NotFoundException, SessaoExpiradaException, VotoExistenteException {
         VotoDTO votoDTO = new VotoDTO().builder()
                 .ehVotoAprovativo(comandoAdicionarVotoDTO.isEhVotoAprovativo())
                 .associado(comandoAdicionarVotoDTO.getAssociado())
                 .sessaoVotacao(sessaoVotacaoService.findById(comandoAdicionarVotoDTO.getSessaoVotacao()))
                 .build();
 
-        // TODO: Validar se sessão está ativa
-        Date deadlineParaVotacao = votoDTO.getSessaoVotacao().getDataHoraAbertura();
-        deadlineParaVotacao.setTime(deadlineParaVotacao.getTime() + votoDTO.getSessaoVotacao().getTempoDeAberturaEmSegundos());
-
-        if (deadlineParaVotacao.before(new Date())) {
-            throw new SessaoExpiradaException(comandoAdicionarVotoDTO.getSessaoVotacao());
-        }
-
-        // TODO: Validar se user já votou
+        validaSeJaVotou(votoDTO);
+        validaStatusSessao(votoDTO);
 
         Voto votoToCreate = votoMapper.toModel(votoDTO);
         Voto votoCreated = votoRepository.save(votoToCreate);
@@ -50,7 +44,24 @@ public class VotoService {
                 .build();
     }
 
-    public VotoDTO findBySessaoVotacaoIdAndAssociado(Long sessaoVotacaoId, String cpf) {
+    private void validaStatusSessao(VotoDTO votoDTO) throws SessaoExpiradaException {
+        Date deadlineParaVotacao = votoDTO.getSessaoVotacao().getDataHoraAbertura();
+        deadlineParaVotacao.setTime(deadlineParaVotacao.getTime() + (votoDTO.getSessaoVotacao().getTempoDeAberturaEmSegundos() * 1000));
+
+        if (deadlineParaVotacao.before(new Date())) {
+            throw new SessaoExpiradaException(votoDTO.getSessaoVotacao().getId());
+        }
+    }
+
+    private void validaSeJaVotou(VotoDTO votoDTO) throws VotoExistenteException {
+        VotoDTO votoComputado = findBySessaoVotacaoIdAndAssociado(votoDTO.getAssociado(), votoDTO.getSessaoVotacao().getId());
+
+        if (votoComputado != null && votoComputado.getId() != null) {
+            throw new VotoExistenteException(votoDTO.getAssociado(), votoDTO.getSessaoVotacao().getId());
+        }
+    }
+
+    public VotoDTO findBySessaoVotacaoIdAndAssociado(String cpf, Long sessaoVotacaoId) {
         Voto voto = votoRepository.findBySessaoVotacao_IdAndAssociado(sessaoVotacaoId, cpf);
         return votoMapper.toDTO(voto);
     }

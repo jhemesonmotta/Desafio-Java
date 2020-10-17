@@ -53,7 +53,7 @@ public class SessaoVotacaoService {
 
     public ResultadoSessaoVotacaoDTO buscarResultadoSessaoVotacao(Long id) throws NotFoundException {
         SessaoVotacaoDTO sessaoVotacaoDTO = findById(id);
-        List<Voto> votos = findAllBySessaoVotacao_Id(id);
+        List<Voto> votos = findAllBySessaoVotacaoId(id);
 
         return new ResultadoSessaoVotacaoDTO().builder()
                 .id(id)
@@ -67,7 +67,7 @@ public class SessaoVotacaoService {
         return (tempoDeAberturaEmSegundos == null || tempoDeAberturaEmSegundos <= 0) ? 60 : tempoDeAberturaEmSegundos;
     }
 
-    private List<Voto> findAllBySessaoVotacao_Id(Long idSessao) {
+    private List<Voto> findAllBySessaoVotacaoId(Long idSessao) {
         return votoRepository.findAllBySessaoVotacao_Id(idSessao);
     }
 }
