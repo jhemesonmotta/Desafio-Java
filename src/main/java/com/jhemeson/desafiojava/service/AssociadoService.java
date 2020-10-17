@@ -28,8 +28,8 @@ public class AssociadoService {
                 .build();
     }
 
-    public AssociadoDTO findById(Long id) throws NotFoundException {
-        Associado associado = associadoRepository.findById(id).orElseThrow(() -> new NotFoundException("Associado não encontrado."));
+    public AssociadoDTO findById(String cpf) throws NotFoundException {
+        Associado associado = associadoRepository.findByCpf(cpf);
         return associadoMapper.toDTO(associado);
     }
 }
