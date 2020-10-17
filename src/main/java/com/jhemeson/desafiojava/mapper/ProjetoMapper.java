@@ -7,10 +7,9 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper
 public interface ProjetoMapper {
-
     ProjetoMapper INSTANCE = Mappers.getMapper(ProjetoMapper.class);
 
-    Projeto toModel(ProjetoDTO bookDTO);
+    Projeto toModel(ProjetoDTO projetoDTO);
 
-    ProjetoDTO toDTO(Projeto book);
+    ProjetoDTO toDTO(Projeto projeto);
 }
