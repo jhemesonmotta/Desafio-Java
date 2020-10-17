@@ -9,9 +9,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class VotoDTO {
-    private Long id;
-    private SessaoVotacaoDTO sessaoVotacao;
+public class ComandoAdicionarVotoDTO {
+    private Long sessaoVotacao;
     private String associado;
     private boolean ehVotoAprovativo;
 }
