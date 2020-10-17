@@ -29,8 +29,8 @@ public class SessaoVotacaoService {
     }
 
     public SessaoVotacaoDTO findById(Long id) throws NotFoundException {
-        SessaoVotacao pauta = sessaoVotacaoRepository.findById(id).orElseThrow(() -> new NotFoundException("Sessão de Votação não encontrada."));
-        return sessaoVotacaoMapper.toDTO(pauta);
+        SessaoVotacao sessaoVotacao = sessaoVotacaoRepository.findById(id).orElseThrow(() -> new NotFoundException("Sessão de Votação não encontrada."));
+        return sessaoVotacaoMapper.toDTO(sessaoVotacao);
     }
 
 }
