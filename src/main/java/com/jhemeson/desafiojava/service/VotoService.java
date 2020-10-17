@@ -43,10 +43,6 @@ public class VotoService {
                 .build();
     }
 
-    public List<Voto> findAllBySessaoVotacao_Id(Long idSessao) {
-        return votoRepository.findAllBySessaoVotacao_Id(idSessao);
-    }
-
     public VotoDTO findBySessaoVotacao_IdAndAssociado(Long sessaoVotacaoId, String cpf) {
         Voto voto = votoRepository.findBySessaoVotacao_IdAndAssociado(sessaoVotacaoId, cpf);
         return votoMapper.toDTO(voto);
