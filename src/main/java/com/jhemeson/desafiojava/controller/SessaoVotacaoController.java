@@ -2,7 +2,6 @@ package com.jhemeson.desafiojava.controller;
 
 import com.jhemeson.desafiojava.dto.ComandoAbrirSessaoVotacaoDTO;
 import com.jhemeson.desafiojava.dto.MessageResponseDTO;
-import com.jhemeson.desafiojava.dto.PautaDTO;
 import com.jhemeson.desafiojava.service.SessaoVotacaoService;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
