@@ -1,14 +1,17 @@
 package com.jhemeson.desafiojava.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Data
 @Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class SessaoVotacao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,13 +24,6 @@ public class SessaoVotacao {
     @Column
     private Integer tempoDeAberturaEmSegundos;
 
-    public SessaoVotacao(Pauta pauta, Integer tempoDeAberturaEmSegundos) {
-        this.pauta = pauta;
-
-        if (tempoDeAberturaEmSegundos == null || tempoDeAberturaEmSegundos == 0) {
-            this.tempoDeAberturaEmSegundos = 60;
-        } else {
-            this.tempoDeAberturaEmSegundos = tempoDeAberturaEmSegundos;
-        }
-    }
+    @Column
+    private Date dataHoraAbertura;
 }
