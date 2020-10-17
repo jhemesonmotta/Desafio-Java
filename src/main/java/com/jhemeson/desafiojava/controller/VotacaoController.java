@@ -16,6 +16,7 @@ public class VotacaoController {
 
     // Adicionar voto
         // validar se Pauta está ativa (sessão ativa)
+        // validar se o cara já votou nessa sessão
 
     // Contabilizar votos
 }
