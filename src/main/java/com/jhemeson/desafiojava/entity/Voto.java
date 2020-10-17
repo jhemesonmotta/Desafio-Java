@@ -21,10 +21,9 @@ public class Voto {
     @JoinColumn(name = "sessao_id")
     private SessaoVotacao sessaoVotacao;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
-    @JoinColumn(name = "associado_id")
-    private Associado associado;
+    @Column(nullable = false)
+    private String associado;
 
-    @Column
+    @Column(nullable = false)
     private boolean ehVotoAprovativo;
 }

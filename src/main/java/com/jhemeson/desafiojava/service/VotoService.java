@@ -22,6 +22,9 @@ public class VotoService {
     }
 
     public MessageResponseDTO create(VotoDTO votoDTO) {
+        // Validar se sessão está ativa
+        // Validar se user já votou
+
         Voto votoToCreate = votoMapper.toModel(votoDTO);
         Voto votoCreated = votoRepository.save(votoToCreate);
 
@@ -34,8 +37,8 @@ public class VotoService {
         return votoRepository.findAllBySessaoVotacao_Id(idSessao);
     }
 
-    public VotoDTO findBySessaoVotacao_IdAndAssociado_Cpf(Long sessaoVotacaoId, String cpf) {
-        Voto voto = votoRepository.findBySessaoVotacao_IdAndAssociado_Cpf(sessaoVotacaoId, cpf);
+    public VotoDTO findBySessaoVotacao_IdAndAssociado(Long sessaoVotacaoId, String cpf) {
+        Voto voto = votoRepository.findBySessaoVotacao_IdAndAssociado(sessaoVotacaoId, cpf);
         return votoMapper.toDTO(voto);
     }
 }
