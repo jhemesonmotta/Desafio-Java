@@ -15,5 +15,9 @@ public class VotoService {
         this.votoRepository = votoRepository;
     }
 
+    // CREATE
 
+    // Find by Sessão
+
+    // find by Sessão And Associado
 }

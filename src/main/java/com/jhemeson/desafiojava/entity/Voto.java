@@ -18,8 +18,8 @@ public class Voto {
     private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
-    @JoinColumn(name = "pauta_id")
-    private Pauta pauta;
+    @JoinColumn(name = "sessao_id")
+    private SessaoVotacao sessaoVotacao;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     @JoinColumn(name = "associado_id")

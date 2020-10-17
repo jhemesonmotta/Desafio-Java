@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class VotoDTO {
-    private PautaDTO pauta;
+    private SessaoVotacaoDTO sessaoVotacao;
     private AssociadoDTO associado;
     private boolean ehVotoAprovativo;
 }
