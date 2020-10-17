@@ -17,7 +17,7 @@ public class SessaoVotacao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "pauta_id")
     private Pauta pauta;
 

@@ -22,7 +22,7 @@ public class PautaController {
 
     // CADASTRAR PAUTA
     @PostMapping
-    public MessageResponseDTO create(@RequestBody PautaDTO pautaDTO) {
+    public MessageResponseDTO cadastrarPauta(@RequestBody PautaDTO pautaDTO) {
         return pautaService.create(pautaDTO);
     }
 

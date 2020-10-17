@@ -1,5 +1,6 @@
 package com.jhemeson.desafiojava.service;
 
+import com.jhemeson.desafiojava.dto.ComandoAbrirSessaoVotacaoDTO;
 import com.jhemeson.desafiojava.dto.MessageResponseDTO;
 import com.jhemeson.desafiojava.dto.SessaoVotacaoDTO;
 import com.jhemeson.desafiojava.entity.SessaoVotacao;
@@ -9,22 +10,33 @@ import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 @Service
 public class SessaoVotacaoService {
     private SessaoVotacaoRepository sessaoVotacaoRepository;
     private static final SessaoVotacaoMapper sessaoVotacaoMapper = SessaoVotacaoMapper.INSTANCE;
+    private PautaService pautaService;
 
     @Autowired
-    public SessaoVotacaoService(SessaoVotacaoRepository sessaoVotacaoRepository) {
+    public SessaoVotacaoService(SessaoVotacaoRepository sessaoVotacaoRepository, PautaService pautaService) {
         this.sessaoVotacaoRepository = sessaoVotacaoRepository;
+        this.pautaService = pautaService;
     }
 
-    public MessageResponseDTO create(SessaoVotacaoDTO pautaDTO) {
-        SessaoVotacao sessaoVotacaoToCreate = sessaoVotacaoMapper.toModel(pautaDTO);
+    public MessageResponseDTO create(ComandoAbrirSessaoVotacaoDTO comandoAbrirSessaoVotacaoDTO) throws NotFoundException {
+
+        SessaoVotacaoDTO sessaoVotacaoDTO = new SessaoVotacaoDTO().builder()
+                .pauta(pautaService.findById(comandoAbrirSessaoVotacaoDTO.getPauta()))
+                .tempoDeAberturaEmSegundos(decideTempoDeAberturaEmSegundos(comandoAbrirSessaoVotacaoDTO.getTempoDeAberturaEmSegundos()))
+                .dataHoraAbertura(new Date())
+                .build();
+
+        SessaoVotacao sessaoVotacaoToCreate = sessaoVotacaoMapper.toModel(sessaoVotacaoDTO);
         SessaoVotacao sessaoVotacaoCreated = sessaoVotacaoRepository.save(sessaoVotacaoToCreate);
 
         return MessageResponseDTO.builder().
-                message("Sessão de Votação criada na pauta" + sessaoVotacaoCreated.getPauta().getNome() + " com o ID:" + sessaoVotacaoCreated.getId())
+                message("Sessão de Votação criada na pauta " + sessaoVotacaoCreated.getPauta().getNome() + " com o ID:" + sessaoVotacaoCreated.getId())
                 .build();
     }
 
@@ -33,4 +45,7 @@ public class SessaoVotacaoService {
         return sessaoVotacaoMapper.toDTO(sessaoVotacao);
     }
 
+    private Integer decideTempoDeAberturaEmSegundos(Integer tempoDeAberturaEmSegundos) {
+        return (tempoDeAberturaEmSegundos == null || tempoDeAberturaEmSegundos <= 0) ? 60 : tempoDeAberturaEmSegundos;
+    }
 }
