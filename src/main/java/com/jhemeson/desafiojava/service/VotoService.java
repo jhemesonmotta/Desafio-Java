@@ -3,15 +3,15 @@ package com.jhemeson.desafiojava.service;
 import com.jhemeson.desafiojava.dto.ComandoAdicionarVotoDTO;
 import com.jhemeson.desafiojava.dto.MessageResponseDTO;
 import com.jhemeson.desafiojava.dto.VotoDTO;
-import com.jhemeson.desafiojava.entity.SessaoVotacao;
 import com.jhemeson.desafiojava.entity.Voto;
+import com.jhemeson.desafiojava.exceptions.SessaoExpiradaException;
 import com.jhemeson.desafiojava.mapper.VotoMapper;
 import com.jhemeson.desafiojava.repository.VotoRepository;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Date;
 
 @Service
 public class VotoService {
@@ -25,7 +25,7 @@ public class VotoService {
         this.sessaoVotacaoService = sessaoVotacaoService;
     }
 
-    public MessageResponseDTO create(ComandoAdicionarVotoDTO comandoAdicionarVotoDTO) throws NotFoundException {
+    public MessageResponseDTO create(ComandoAdicionarVotoDTO comandoAdicionarVotoDTO) throws NotFoundException, SessaoExpiradaException {
         VotoDTO votoDTO = new VotoDTO().builder()
                 .ehVotoAprovativo(comandoAdicionarVotoDTO.isEhVotoAprovativo())
                 .associado(comandoAdicionarVotoDTO.getAssociado())
@@ -33,6 +33,13 @@ public class VotoService {
                 .build();
 
         // TODO: Validar se sessão está ativa
+        Date deadlineParaVotacao = votoDTO.getSessaoVotacao().getDataHoraAbertura();
+        deadlineParaVotacao.setTime(deadlineParaVotacao.getTime() + votoDTO.getSessaoVotacao().getTempoDeAberturaEmSegundos());
+
+        if (deadlineParaVotacao.before(new Date())) {
+            throw new SessaoExpiradaException(comandoAdicionarVotoDTO.getSessaoVotacao());
+        }
+
         // TODO: Validar se user já votou
 
         Voto votoToCreate = votoMapper.toModel(votoDTO);
@@ -43,7 +50,7 @@ public class VotoService {
                 .build();
     }
 
-    public VotoDTO findBySessaoVotacao_IdAndAssociado(Long sessaoVotacaoId, String cpf) {
+    public VotoDTO findBySessaoVotacaoIdAndAssociado(Long sessaoVotacaoId, String cpf) {
         Voto voto = votoRepository.findBySessaoVotacao_IdAndAssociado(sessaoVotacaoId, cpf);
         return votoMapper.toDTO(voto);
     }

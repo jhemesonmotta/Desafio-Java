@@ -2,6 +2,7 @@ package com.jhemeson.desafiojava.controller;
 
 import com.jhemeson.desafiojava.dto.ComandoAdicionarVotoDTO;
 import com.jhemeson.desafiojava.dto.MessageResponseDTO;
+import com.jhemeson.desafiojava.exceptions.SessaoExpiradaException;
 import com.jhemeson.desafiojava.service.VotoService;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class VotoController {
 
     // Adicionar Voto
     @PostMapping
-    public MessageResponseDTO adicionarVoto(@RequestBody ComandoAdicionarVotoDTO comandoAdicionarVotoDTO) throws NotFoundException {
+    public MessageResponseDTO adicionarVoto(@RequestBody ComandoAdicionarVotoDTO comandoAdicionarVotoDTO) throws NotFoundException, SessaoExpiradaException {
         return votoService.create(comandoAdicionarVotoDTO);
     }
 }
