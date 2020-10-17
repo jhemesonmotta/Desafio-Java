@@ -8,6 +8,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class VotacaoController {
     // Abrir sessão de votação
 
+        //    if (tempoDeAberturaEmSegundos == null || tempoDeAberturaEmSegundos == 0) {
+        //        this.tempoDeAberturaEmSegundos = 60;
+        //    } else {
+        //        this.tempoDeAberturaEmSegundos = tempoDeAberturaEmSegundos;
+        //    }
+
     // Adicionar voto
         // validar se Pauta está ativa (sessão ativa)
 
