@@ -27,7 +27,8 @@ class PautaControllerTest {
     @Test
     void cadastrarPauta() {
         PautaDTO pautaDTO = new PautaDTO().builder().nome("Pauta Teste").build();
-        Pauta pauta = new Pauta().builder().nome("Pauta Teste").build();
+        Pauta pauta = new Pauta().builder()
+                .nome("Pauta Teste").build();
 
         BDDMockito.when(pautaRepository.save(pauta)).thenReturn(pauta);
 
