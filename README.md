@@ -46,7 +46,6 @@ Há duas formas de testar esta aplicação facilmente. Escolha a sua:
 - Spring
 - Maven
 - PostgrSQL
-- ModelMapper
 - Swagger
 - JUnit
 - Mockito
