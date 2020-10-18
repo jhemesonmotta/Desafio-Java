@@ -4,8 +4,11 @@ import com.jhemeson.desafiojava.dto.ComandoAdicionarVotoDTO;
 import com.jhemeson.desafiojava.dto.MessageResponseDTO;
 import com.jhemeson.desafiojava.dto.VotoDTO;
 import com.jhemeson.desafiojava.entity.Voto;
+import com.jhemeson.desafiojava.exceptions.CPFInvalidoException;
+import com.jhemeson.desafiojava.exceptions.GenericException;
 import com.jhemeson.desafiojava.exceptions.SessaoExpiradaException;
 import com.jhemeson.desafiojava.exceptions.VotoExistenteException;
+import com.jhemeson.desafiojava.external.integrations.UsuarioExternoService;
 import com.jhemeson.desafiojava.mapper.VotoMapper;
 import com.jhemeson.desafiojava.repository.VotoRepository;
 import javassist.NotFoundException;
@@ -18,31 +21,38 @@ import java.util.Date;
 public class VotoService {
     private VotoRepository votoRepository;
     private SessaoVotacaoService sessaoVotacaoService;
+    private UsuarioExternoService usuarioExternoService;
     private static final VotoMapper votoMapper = VotoMapper.INSTANCE;
 
     @Autowired
-    public VotoService(VotoRepository votoRepository, SessaoVotacaoService sessaoVotacaoService) {
+    public VotoService(VotoRepository votoRepository, SessaoVotacaoService sessaoVotacaoService, UsuarioExternoService usuarioExternoService) {
         this.votoRepository = votoRepository;
         this.sessaoVotacaoService = sessaoVotacaoService;
+        this.usuarioExternoService = usuarioExternoService;
     }
 
-    public MessageResponseDTO create(ComandoAdicionarVotoDTO comandoAdicionarVotoDTO) throws NotFoundException, SessaoExpiradaException, VotoExistenteException {
+    public MessageResponseDTO create(ComandoAdicionarVotoDTO comandoAdicionarVotoDTO) throws NotFoundException, SessaoExpiradaException, VotoExistenteException, CPFInvalidoException, GenericException {
         VotoDTO votoDTO = new VotoDTO().builder()
                 .ehVotoAprovativo(comandoAdicionarVotoDTO.isEhVotoAprovativo())
                 .associado(comandoAdicionarVotoDTO.getAssociado())
                 .sessaoVotacao(sessaoVotacaoService.findById(comandoAdicionarVotoDTO.getSessaoVotacao()))
                 .build();
 
-        validaSeJaVotou(votoDTO);
-        validaStatusSessao(votoDTO);
+        if (usuarioExternoService.podeVotar(votoDTO.getAssociado())) {
+            validaSeJaVotou(votoDTO);
+            validaStatusSessao(votoDTO);
 
-        Voto votoToCreate = votoMapper.toModel(votoDTO);
-        Voto votoCreated = votoRepository.save(votoToCreate);
+            Voto votoToCreate = votoMapper.toModel(votoDTO);
+            Voto votoCreated = votoRepository.save(votoToCreate);
 
-        return MessageResponseDTO.builder()
-                .message("Voto adicionado a Sessão " + votoCreated.getSessaoVotacao().getId() + " com o ID:" + votoCreated.getId())
-                .build();
+            return MessageResponseDTO.builder()
+                    .message("Voto adicionado a Sessão " + votoCreated.getSessaoVotacao().getId() + " com o ID:" + votoCreated.getId())
+                    .build();
+        } else {
+            throw new GenericException("Usuário não pode votar.");
+        }
     }
+
 
     private void validaStatusSessao(VotoDTO votoDTO) throws SessaoExpiradaException {
         Date deadlineParaVotacao = votoDTO.getSessaoVotacao().getDataHoraAbertura();

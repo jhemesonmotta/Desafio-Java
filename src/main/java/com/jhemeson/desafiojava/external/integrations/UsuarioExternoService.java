@@ -21,9 +21,10 @@ public class UsuarioExternoService {
 
     public boolean podeVotar(String cpf) throws CPFInvalidoException {
         try {
-            String url = "" + cpf;
+            String url = "https://user-info.herokuapp.com/users/" + cpf;
             ResponseEntity<?> response = restTemplate.exchange(url, HttpMethod.GET, null, String.class);
-            return response.getBody().equals("ABLE_TO_VOTE");
+            String responseBody = response.getBody().toString();
+            return responseBody.equals("{\"status\":\"ABLE_TO_VOTE\"}");
         } catch (HttpStatusCodeException ex) {
             if (ex.getStatusCode() == HttpStatus.NOT_FOUND)
                 throw new CPFInvalidoException(cpf);

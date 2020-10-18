@@ -2,6 +2,8 @@ package com.jhemeson.desafiojava.controller;
 
 import com.jhemeson.desafiojava.dto.ComandoAdicionarVotoDTO;
 import com.jhemeson.desafiojava.dto.MessageResponseDTO;
+import com.jhemeson.desafiojava.exceptions.CPFInvalidoException;
+import com.jhemeson.desafiojava.exceptions.GenericException;
 import com.jhemeson.desafiojava.exceptions.SessaoExpiradaException;
 import com.jhemeson.desafiojava.exceptions.VotoExistenteException;
 import com.jhemeson.desafiojava.service.VotoService;
@@ -25,7 +27,7 @@ public class VotoController {
 
     // Adicionar Voto
     @PostMapping
-    public MessageResponseDTO adicionarVoto(@RequestBody ComandoAdicionarVotoDTO comandoAdicionarVotoDTO) throws NotFoundException, SessaoExpiradaException, VotoExistenteException {
+    public MessageResponseDTO adicionarVoto(@RequestBody ComandoAdicionarVotoDTO comandoAdicionarVotoDTO) throws NotFoundException, SessaoExpiradaException, VotoExistenteException, CPFInvalidoException, GenericException {
         return votoService.create(comandoAdicionarVotoDTO);
     }
 }
