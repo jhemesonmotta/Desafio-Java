@@ -93,7 +93,44 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"sessaoVotacao\": 1,\n    \"associado\": \"056-763-073-03\",\n    \"ehVotoAprovativo\": true\n}",
+					"raw": "{\n\t\"sessaoVotacao\": 1,\n    \"associado\": \"97630084099\",\n    \"ehVotoAprovativo\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/voto",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"voto"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criar Voto Inválido",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"sessaoVotacao\": 1,\n    \"associado\": \"05676307303\",\n    \"ehVotoAprovativo\": true\n}",
 					"options": {
 						"raw": {
 							"language": "json"
