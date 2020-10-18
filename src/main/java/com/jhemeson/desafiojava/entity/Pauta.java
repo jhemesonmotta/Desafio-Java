@@ -19,4 +19,8 @@ public class Pauta {
 
     @Column
     private String nome;
+
+    public Pauta(String nome) {
+        this.nome = nome;
+    }
 }

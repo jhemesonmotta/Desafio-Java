@@ -39,8 +39,8 @@ public class VotoService {
         Voto votoToCreate = votoMapper.toModel(votoDTO);
         Voto votoCreated = votoRepository.save(votoToCreate);
 
-        return MessageResponseDTO.builder().
-                message("Voto adicionado a Sessão " + votoCreated.getSessaoVotacao().getId() + " com o ID:" + votoCreated.getId())
+        return MessageResponseDTO.builder()
+                .message("Voto adicionado a Sessão " + votoCreated.getSessaoVotacao().getId() + " com o ID:" + votoCreated.getId())
                 .build();
     }
 

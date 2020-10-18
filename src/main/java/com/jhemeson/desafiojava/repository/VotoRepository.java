@@ -1,6 +1,5 @@
 package com.jhemeson.desafiojava.repository;
 
-import com.jhemeson.desafiojava.entity.SessaoVotacao;
 import com.jhemeson.desafiojava.entity.Voto;
 import org.springframework.data.jpa.repository.JpaRepository;
 

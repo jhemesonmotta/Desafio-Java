@@ -23,8 +23,8 @@ public class PautaService {
         Pauta pautaToCreate = pautaMapper.toModel(pautaDTO);
         Pauta pautaCreated = pautaRepository.save(pautaToCreate);
 
-        return MessageResponseDTO.builder().
-                message("Pauta " + pautaCreated.getNome() + " foi adicionada à base de dados com o ID:" + pautaCreated.getId())
+        return MessageResponseDTO.builder()
+                .message("Pauta " + pautaCreated.getNome() + " foi adicionada à base de dados com o ID:" + pautaCreated.getId())
                 .build();
     }
 
