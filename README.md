@@ -17,7 +17,7 @@ Mais informações sobre o desafio podem ser encontradas no arquivo "External_Ut
 
 A imagem abaixo é uma representação informal que busca auxiliar a compreensão de como os integrantes do domínio deste projeto se comunicam.
 
-![Install Aimeos TYPO3 extension](https://drive.google.com/file/d/1NapItJYh9xxrEWsFR7DvSEPDjqpY4GmF/view?usp=sharing)
+![Diagrama do Domínio](https://drive.google.com/file/d/1NapItJYh9xxrEWsFR7DvSEPDjqpY4GmF/view?usp=sharing)
 
 ## Requisitos para Rodar a Aplicação
 - Maven 3.6+
