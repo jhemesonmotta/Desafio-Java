@@ -34,13 +34,15 @@ Se tudo correr certo, você poderá acessar a API através do endereço "http://
 
 ## Instruções para Testar a Aplicação
 
-Há duas formas de testar esta aplicação facilmente. Escolha a sua:
+Há três formas de testar esta aplicação facilmente. Escolha a sua:
 
-- 1. Execute os testes através do Postman: para isso, basta importar o arquivo "External_Utils/desafio-java.postman_collection" através do aplicativo referido.
+1. Execute os testes através do Postman: para isso, basta importar o arquivo "External_Utils/desafio-java.postman_collection" através do aplicativo referido.
 
-- 2. Execute o comando "mvn test" caso queira executar os testes automatizados programados.
+2. Execute o comando "mvn test" caso queira executar os testes automatizados programados.
 
-## Stack utilizada
+3. Outra forma de executar os testes automatizados é através da IDE. No Intellij, por exemplo, basta clicar com o botão direito sobre o projeto e selecionar a opção "Run All Tests".
+
+## Tecnologias Utilizadas
 
 - Java 8
 - Spring
@@ -52,7 +54,7 @@ Há duas formas de testar esta aplicação facilmente. Escolha a sua:
 
 ## Rationale
 
-#### Stack escolhida
+#### Tecnologias Escolhidas
 
 A Stack aqui utilizada foi escolhida simplesmente por ser moderna e facilitar a construção de sistemas Java. O SBGD (PostgrSQL) foi escolhido simplesmente por ser o único que eu já tinha instalado e configurado em minha máquina.
 
@@ -64,3 +66,6 @@ TBD
 
 Quanto ao versionamento do código da API: este é feito através do repositório acessado neste momento. Quanto ao versionamento semântico da API: este foi representado através do texto "v1" presente em todas as rotas construídas. Se no futuro uma nova versão de algum endpoint for construída, este pode ter o texto "v2" para identificar que é uma versão diferente.
 
+#### Testes
+
+Tenho conhecimento de que em um contexto real seria ideal construir mais testes. Idealmente, pelo menos a camada Repository deveria ser testada - todavia, foram construídos testes somente para os controllers. O motivo disso foi a falta de tempo (todo o teste foi feito em um final de semana - final de semana este em que tive aulas do mestrado, portanto dividi meu tempo entre as atividades e fiz algumas em paralelo).

@@ -46,7 +46,7 @@ public class VotoService {
             Voto votoCreated = votoRepository.save(votoToCreate);
 
             return MessageResponseDTO.builder()
-                    .message("Voto adicionado a Sessão " + votoCreated.getSessaoVotacao().getId() + " com o ID:" + votoCreated.getId())
+                    .message("Voto adicionado")
                     .build();
         } else {
             throw new GenericException("Usuário não pode votar.");
