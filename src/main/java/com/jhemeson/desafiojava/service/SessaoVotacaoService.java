@@ -39,10 +39,10 @@ public class SessaoVotacaoService {
                 .build();
 
         SessaoVotacao sessaoVotacaoToCreate = sessaoVotacaoMapper.toModel(sessaoVotacaoDTO);
-        SessaoVotacao sessaoVotacaoCreated = sessaoVotacaoRepository.save(sessaoVotacaoToCreate);
+        sessaoVotacaoRepository.save(sessaoVotacaoToCreate);
 
         return MessageResponseDTO.builder()
-                .message("Sessão de Votação criada na pauta " + sessaoVotacaoCreated.getPauta().getNome() + " com o ID:" + sessaoVotacaoCreated.getId())
+                .message("Sessão de Votação criada")
                 .build();
     }
 

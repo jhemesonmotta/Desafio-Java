@@ -2,13 +2,11 @@ package com.jhemeson.desafiojava.controller;
 
 import com.jhemeson.desafiojava.dto.ComandoAbrirSessaoVotacaoDTO;
 import com.jhemeson.desafiojava.dto.MessageResponseDTO;
-import com.jhemeson.desafiojava.dto.PautaDTO;
 import com.jhemeson.desafiojava.entity.Pauta;
 import com.jhemeson.desafiojava.entity.SessaoVotacao;
 import com.jhemeson.desafiojava.repository.PautaRepository;
 import com.jhemeson.desafiojava.repository.SessaoVotacaoRepository;
 import org.assertj.core.api.Assertions;
-import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.BDDMockito;
@@ -37,7 +35,6 @@ class SessaoVotacaoControllerTest {
     @Test
     void abrirSessao() {
         Pauta pauta = new Pauta(999L,"Pauta teste");
-        this.pautaRepository.save(pauta);
 
         ComandoAbrirSessaoVotacaoDTO comandoAbrirSessaoVotacaoDTO = new ComandoAbrirSessaoVotacaoDTO().builder()
                 .pauta(pauta.getId())
@@ -50,6 +47,10 @@ class SessaoVotacaoControllerTest {
                 .tempoDeAberturaEmSegundos(1000)
                 .build();
 
+        BDDMockito.when(pautaRepository.save(pauta)).thenReturn(pauta);
+
+        BDDMockito.when(pautaRepository.findById(pauta.getId())).thenReturn(java.util.Optional.of(pauta));
+
         BDDMockito.when(sessaoVotacaoRepository.save(sessaoVotacao)).thenReturn(sessaoVotacao);
 
         ResponseEntity<MessageResponseDTO> response = restTemplate
@@ -60,5 +61,6 @@ class SessaoVotacaoControllerTest {
 
     @Test
     void buscarResultadoSessaoVotacao() {
+
     }
 }
