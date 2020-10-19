@@ -55,6 +55,7 @@ Há pelo menos quatro formas de testar esta aplicação (em três tipos de teste
 - JUnit
 - Mockito
 - JMeter (externa ao projeto)
+- Postman (externa ao projeto)
 
 ## Rationale
 
