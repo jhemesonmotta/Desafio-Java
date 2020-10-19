@@ -17,8 +17,7 @@ Mais informações sobre o desafio podem ser encontradas no arquivo "External_Ut
 
 A imagem abaixo é uma representação informal que busca auxiliar a compreensão de como os integrantes do domínio deste projeto se comunicam.
 
-![Diagrama do Domínio](https://drive.google.com/file/d/1NapItJYh9xxrEWsFR7DvSEPDjqpY4GmF/view?usp=sharing)
-
+![Diagrama do Domínio](External_Utils/Diagrama_de_Modelo_de_Dominio.png)
 ## Requisitos para Rodar a Aplicação
 - Maven 3.6+
 - Java 8
@@ -34,13 +33,17 @@ Se tudo correr certo, você poderá acessar a API através do endereço "http://
 
 ## Instruções para Testar a Aplicação
 
-Há três formas de testar esta aplicação facilmente. Escolha a sua:
+Há pelo menos quatro formas de testar esta aplicação (em três tipos de testes diferentes). Escolha a sua:
 
-1. Execute os testes através do Postman: para isso, basta importar o arquivo "External_Utils/desafio-java.postman_collection" através do aplicativo referido.
+1. Tipo: testes de funcionamento manuais. Execute os testes através do Postman: para isso, basta importar o arquivo "External_Utils/desafio-java.postman_collection" através do aplicativo referido.
 
-2. Execute o comando "mvn test" caso queira executar os testes automatizados programados.
+2. Tipo: testes de funcionamento automatizados. Execute o comando "mvn test" caso queira executar os testes automatizados programados.
 
-3. Outra forma de executar os testes automatizados é através da IDE. No Intellij, por exemplo, basta clicar com o botão direito sobre o projeto e selecionar a opção "Run All Tests".
+3. Tipo: testes de funcionamento automatizados. Outra forma de executar os testes automatizados é através da IDE. No Intellij, por exemplo, basta clicar com o botão direito sobre o projeto e selecionar a opção "Run All Tests".
+
+4. Tipo: testes de performance. Os testes de performance aqui feitos utilizaram a ferramenta JMeter (que não está inclusa no projeto). Caso queira executá-los, baixe a ferramenta (https://jmeter.apache.org/download_jmeter.cgi) e utilize o arquivo de configuração "External_Utils/Desafio-Java-Testing.jmx". O teste configurado simula o acesso de 1000 usuários à ferramenta em 2 segundos com um timeout de 50 milissegundos por requisição. Como visto na imagem abaixo, entre as 1000 requisições, só foi registrado um erro (onde o tempo de resposta foi de 52 milissegundos).
+
+![Interface Jmeter](External_Utils/jmeter-test.PNG)
 
 ## Tecnologias Utilizadas
 
@@ -51,6 +54,7 @@ Há três formas de testar esta aplicação facilmente. Escolha a sua:
 - Swagger
 - JUnit
 - Mockito
+- JMeter (externa ao projeto)
 
 ## Rationale
 
@@ -60,7 +64,7 @@ A Stack aqui utilizada foi escolhida simplesmente por ser moderna e facilitar a 
 
 #### Performance
 
-TBD
+A ferramenta JMeter foi utilizada por ser comum no mercado e ser de fácil utilização. Os testes foram rodados somente em localhost, todavia, tenho conhecimento de que em um contexto real, para garantir que não há um gargalo do servidor, estes também devem ser executados após a publicação.
 
 #### Versionamento da API
 
